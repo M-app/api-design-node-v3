@@ -1,10 +1,10 @@
 import express from 'express'
 import { json, urlencoded } from 'body-parser'
 import morgan from 'morgan'
-import config from './config'
+// import config from './config'
 import cors from 'cors'
 import { signup, signin, protect } from './utils/auth'
-import { connect } from './utils/db'
+// import { connect } from './utils/db'
 import userRouter from './resources/user/user.router'
 import itemRouter from './resources/item/item.router'
 import listRouter from './resources/list/list.router'
@@ -26,13 +26,15 @@ app.use('/api/user', userRouter)
 app.use('/api/item', itemRouter)
 app.use('/api/list', listRouter)
 
+app.get('/', (req, res) => {
+  res.send({ message: 'hola' })
+})
+app.post('/', (req, res) => {
+  console.log(req.body)
+  res.send({ message: 'ok' })
+})
 export const start = async () => {
-  try {
-    await connect()
-    app.listen(config.port, () => {
-      console.log(`REST API on http://localhost:${config.port}/api`)
-    })
-  } catch (e) {
-    console.error(e)
-  }
+  app.listen(3000, () => {
+    console.log('servidor funcionando')
+  })
 }
