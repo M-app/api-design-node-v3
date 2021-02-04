@@ -11,5 +11,16 @@ app.use(cors())
 app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
+app.get('/', (req, res) => {
+  res.send({ mensaje: 'ok' })
+})
+app.post('/', (req, res) => {
+  console.log(req.body)
+  res.send({ mensaje: 'hola' })
+})
 
-export const start = () => {}
+export const start = () => {
+  app.listen(3000, () => {
+    console.log('el servidor está funcionando')
+  })
+}
